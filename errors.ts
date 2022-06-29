@@ -1,3 +1,4 @@
+// ES2021まで
 export class OldCustomError extends Error {
     oldCause: Error | undefined;
     constructor(message: string, cause?: Error) {
