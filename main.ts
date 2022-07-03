@@ -1,5 +1,5 @@
-import { ResError, ReqError, Res2Error } from "./errors.ts";
-import pino from "https://esm.sh/pino@8.1.0"
+import { ResError, ReqError, Res2Error } from "./errors";
+import pino from "pino"
 
 // Output Object
 type CustomErr = {
@@ -27,9 +27,8 @@ const printPino = (e: Error) => {
           asObject: true,
         },
       });
-    logger.error(e);
-    logger.error({e});
-
+    // logger.error(e);
+    logger.error({err: e});
 }
 
 // throw error
