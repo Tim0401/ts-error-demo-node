@@ -1,4 +1,5 @@
 import { ResError, ReqError, Res2Error } from "./errors.ts";
+import pino from "https://esm.sh/pino@8.1.0"
 
 // Output Object
 type CustomErr = {
@@ -15,12 +16,29 @@ const printErr = (e: Error): CustomErr => {
     return {name: name, msg: message, cause: printErr(cause)};
 }
 
+const printPino = (e: Error) => {
+    const logger = pino({
+        formatters: {
+            level: (label, _) => ({
+              level: label,
+            }),
+          },
+        browser: {
+          asObject: true,
+        },
+      });
+    logger.error(e);
+    logger.error({e});
+
+}
+
 // throw error
 try {
-    throw new ResError("a", {cause: new ReqError("b")});
+    throw new ResError("a", {cause: new ReqError("b"), obj: {hoge: "huga"}});
 } catch(e) {
     if (e instanceof ResError) {
-        console.log(JSON.stringify(printErr(e)));
+        // console.log(JSON.stringify(printErr(e)));
+        printPino(e);
     }
 }
 
