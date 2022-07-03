@@ -1,4 +1,4 @@
-import { ResError, ReqError } from "./errors.ts";
+import { ResError, ReqError, Res2Error } from "./errors.ts";
 
 // Output Object
 type CustomErr = {
@@ -25,11 +25,12 @@ try {
 }
 
 // 型の異なるエラーを返却できる
-const dirtyRetErr = (): ReqError => {
-    return new ResError("c")
+const dirtyRetErr = (): ResError => {
+    return new Res2Error("c")
 }
 
 // 謎の挙動となる
 if (dirtyRetErr() instanceof ResError) {
     console.log("ReqError == ResError");
+    dirtyRetErr().print()
 }

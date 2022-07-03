@@ -8,8 +8,21 @@ export class OldCustomError extends Error {
 }
 
 export class ReqError extends Error {
-    // readonly className = "ReqError";
+    readonly #className = "ReqError";
+    print() {
+        console.log(this.#className)
+    }
  }
 export class ResError extends Error { 
-    // readonly className = "ResError";
+    readonly #className = "ResError";
+    print() {
+        console.log(this.#className)
+    }
+}
+export class Res2Error extends ResError { 
+    readonly #className = "Res2Error";
+    print() {
+        super.print();
+        console.log(this.#className)
+    }
 }
